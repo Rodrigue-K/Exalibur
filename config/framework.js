@@ -1,10 +1,9 @@
-//  It should show descriptions of the tests
-const that = (description, fn) => {
+const describe = (description, fn) => {
     console.log(description)
     fn()
 }
 
-const can = (message, fn) => that('  ' + message, fn)
+const can = (message, fn) => { console.log('  ' + message),  fn() }
 
 const matchers = (statement) => ({
     toEqual:(assertion) => {
@@ -22,15 +21,29 @@ const matchers = (statement) => ({
             statement();
         }
         catch(error) {
-            alert(error)
+          alert(error)
+          console.log(error)
         }
-        finally{
-            if(statement != assertion) {
-                console.log('Test unsuccessful! Expected: ' + statement + ' to throw ' + assertion + ' error ')
-                return true
-            }
+
+
+    },
+
+    isPrime: (statement) => { 
+        for(let i = 2; i < statement; i++) {
+            if(statement % i === 0)
+            console.log("Unsuccessful") 
+            return false
         }
-        }
+        console.log("Successful")
+        return true 
+
+
+    
+
+    
+
+
+    
 })
 
 const expect = (statement) => matchers(statement)
